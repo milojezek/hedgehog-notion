@@ -1,3 +1,4 @@
+import { ChangeEventHandler, useRef } from "react";
 import styled from "styled-components";
 
 const CoverContainer = styled.div`
@@ -9,12 +10,11 @@ const CoverContainer = styled.div`
   align-items: center;
 `;
 
-const ChangeButton = styled.button`
+const CoverButton = styled.button`
   position: absolute;
 	bottom: 20px;
 	right: 90px;
 	padding: 6px;
-	opacity: 0;
 	transition: opacity 0.2s ease-in-out;
 	background: white;
 	border: 2px solid #888;
@@ -22,16 +22,40 @@ const ChangeButton = styled.button`
 	color: #6f6f6f;
 	font-weight: bold;
 	cursor: pointer;
+  
+  &:hover {
+    border-color: black;
+    color: black;
+  }
+`;
+
+const CoverImage = styled.img`
+  width: 100%;
+	max-height: 295px;
+	object-fit: cover;
 `;
 
 
 export const Cover = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const onChangeCoverImage = () => {
+    fileInputRef.current?.click();
+  };
+
+  const onCoverImageUpload: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const target = event.target;
+    console.log(target?.files?.[0]);
+  };
+
 
   return (
     <CoverContainer>
-      <img />
-      <ChangeButton>Change cover</ChangeButton>
-      <input type="file" />
+      <CoverImage src="/notisbok-cover.png" alt="Cover" />
+      <CoverButton onClick={onChangeCoverImage}>
+        Change cover
+      </CoverButton>
+      <input onChange={onCoverImageUpload} style={{ display: "none" }} ref={fileInputRef} type="file" />
     </CoverContainer>
   );
 };
