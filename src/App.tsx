@@ -1,10 +1,11 @@
 import "./App.css";
+import { Cover } from "./page/Cover.tsx";
 
 function App() {
 
   return (
     <>
-      Notisbok
+      <Cover />
     </>
   );
 }
