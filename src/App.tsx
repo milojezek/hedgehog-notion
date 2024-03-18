@@ -1,11 +1,11 @@
 import "./App.css";
-import { Cover } from "./page/Cover.tsx";
+import { Page } from "./page/Page";
 
 function App() {
 
   return (
     <>
-      <Cover />
+      <Page />
     </>
   );
 }
